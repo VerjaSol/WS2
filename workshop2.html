@@ -30,6 +30,20 @@ function myFunction() {
   document.write (txt);
 }
 myFunction();
+document.write('<img src="http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg">');
+
+var images =[
+"http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg", 
+"http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg", 
+"http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg"
+];
+
+var i;
+function randomImage(){
+    i = Math.round ( Math.random() * 2 );
+	  document.getElementsByTagName('img')[0].src=images[i];
+}
+randomImage();
   </script>
   <body>
     <h1>Workshop 2: JavaScript BOM -- test</h1>
