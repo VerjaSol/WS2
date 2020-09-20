@@ -6,7 +6,30 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <script>
-    document.write("Hoi Maailma");
+    document.write('<strong>"If I had nine hours to chop down a tree, I\'d spend the first six sharpening my ax."</strong> <br>-- Abraham Lincoln');
+    function repeatingText(){
+    for (i=1; i<=50; i++){
+        document.writeln("This is a line of text "+i+"<br>");
+    }
+}
+repeatingText();
+
+if(navigator.appCodeName = 'Mozilla'){
+    location.href = "http://mozilla.org";
+}
+else location.href = "http://www.microsoft.com";
+
+function myFunction() {
+  var txt;
+  var r = confirm("Are you a student!");
+  if (r == true) {
+    txt = "Welcome student!";
+  } else {
+    txt = "Sorry! This page is for students only!";
+  }
+  document.write (txt);
+}
+myFunction();
   </script>
   <body>
     <h1>Workshop 2: JavaScript BOM -- test</h1>
