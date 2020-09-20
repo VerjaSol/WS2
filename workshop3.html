@@ -6,16 +6,19 @@
         <link rel="stylesheet" href="css/styles.css">
         <script>
             function myFunction() {
-  var txt;
-  var r = confirm("Are you a student!");
-  if (r == true) {
-    txt = "Welcome student!";
-  } else {
-    txt = "Sorry! This page is for students only!";
-  }
-  document.write (txt);
-}
-myFunction();
+             var txt;
+             var r = confirm("Are you a student!");
+             if (r == true) {
+                txt = "Welcome student!";
+                } 
+             else {
+                txt = "Sorry! This page is for students only!";
+                }
+             document.write (txt);
+            }
+            myFunction();
+            nappi=document.getElementsByTagName('button')[0];
+            nappi.addEventListener('click', function(){alert("You clicked me! "+ Date() )})
         </script>
     </head>
     <body class="ws3">
