@@ -176,6 +176,13 @@ var persons = ["Nyssa P. Skinner", "593-4241 Lacus, St.","Cape Verde",
         <p>Add onMouseMove -event to the DIV-element above. When you move mouse over the DIV (rectangle) the program should output the coordinates of your pointer. Try first outputting to the console using console.log.</p>
         <p> When the program is working, you can try outputting the text on the H2 element with an id "coords" the box</p> 
         <p>HINT: You need to use document.getElementById("coordinates").innerHTML to achieve this.</p>
+		<script>
+			document.getElementById("coordinates").addEventListener("mouseover", myFunction);
+			function myFunction(event){
+			document.getElementById("coordinates").innerHTML += event.clientX + event.clientY;
+			}
+			</script>
+
     </body>
 </html>
 
