@@ -1,154 +1,267 @@
 <!doctype html>
-<HTML lang="en">
-	<head>
-		<title>Workshop 4</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/styles.css">
-	</head>
-	<body class="ws4">
-		<h1>Workshop 4: DOM Scripting</h1>
-		<hr />
-		<p>In this exercise we will practice the art of DOM Scripting with JavaScript. Use the lecture-material as a reference guide side by side these exercises. It might also be a good idea to save the lines of code you write during the exercises for later use. </p>
-
-		<hr/>
-		<h2>Exercise 1: Basic  DOM Manipulation</h2>
-		<p>&nbsp;Below you will see three buttons. Edit the source code and add an onClick-events to these buttons. Use Developer Console to find the </p>
-		<p>
-		  <button onclick="changeHeading();">Button 1</button>
-		  <button onclick="secondButton">Button 2</button>
-		  <button onclick="">Button 3</button>
-		</p>
-
-		<ul>
-			<li>The first button should run a JavaScript-function, which will find the reference to &quot;Workshop 4&quot; heading on this page and change the contents of it to &quot;Modified Heading!&quot;. </li>
-			<li> The second button should run a function, which will modify the style of the &quot;Exercise 2&quot; heading on this page. JavaScript should change at least the font size, style and color and the background color</li>
-			<li>The third button should append the following text paragraph after the <strong>4th paragraph tag &lt;p&gt;</strong> on the page (without overwriting the current content). Change the background of the entire page as well. Note: The Lorem ipsum text should be in italics. It should also add a logo image of some sort after the text.<br>
-			<br>
-			<strong id="lorem"><em>&quot;Lorem ipsum</em></strong><em> dolor sit amet, consectetuer   adipiscing elit. Sed posuere interdum sem. Quisque ligula eros   ullamcorper quis, lacinia quis facilisis sed sapien. Mauris varius diam   vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget   velit. &quot;</em></li>
-		</ul>
-		<hr/>
-		<h2>Exercise 2: DOM Traversing using ID's and classes</h2>
-		<p class="surprise">Add onchange -events to following checkboxes.</p>
-		<p>
-			<label>
-				<input onchange="hide()" name="CheckboxGroup1" type="checkbox" id="CheckboxGroup1_0" title="Actions" value="1">
-				Hide me 
-			</label>
-			<br>
-			<label>
-				<input onchange="show()" type="checkbox" name="CheckboxGroup1" value="2" id="CheckboxGroup1_1">
-				Show me
-			</label>
-			<br>
-			<label>
-				<input type="checkbox" name="CheckboxGroup1" value="3" id="CheckboxGroup1_2"> 
-				<span id="surpise">Surprise</span>
-			</label>
-		</p>
-		<ul>
-		  <li>First checkbox: Find out which element has been described with the id &quot;me&quot;. Change the visibility (display value) of the element to none. What happens?</li>
-		  <li>Second checkbox should return the visibility of the element to a normal state (block).</li>
-		  <li>Third checkbox should find the elements with class &quot;surprise&quot; and change the font size to 20.</li>
-		</ul>
-		<div id="me" class="red-box"></div>
-		<p>&nbsp;</p>
-		<hr/>
-		<h2>Exercise 3: Images and pulldowns</h2>
-			<ul>
-				<li>Write a JavaScript function, which will fire when the pulldown menu item is changed. Show the users choice using alert -box.</li>
-				<li>When the mouse is moved on top of the image, a colored border should appear surrounding it. On mouse out, border should disappear</li>
-				<li>When you have accomplished the above, change the image (id=&quot;carimage&quot;) below based on the users choice on the pulldown menu below. Find appropriate images from the web.
-			</ul>
-		  <p>Select a new car from the list.</p>
-		  <select name="mySelect" id="mySelect" onchange="">
-			<option value="BMW">BMW         
-			<option value="Audi">Audi
-			<option value="Mercedes">Mercedes
-			<option value="Volvo">Volvo
-		  </select>
-		  <br>
-		  <br>
-		<img alt="" onmouseover="" onmouseout="" style="left: 0px; opacity: 1;" src="http://cdn.bmwblog.com/wp-content/uploads/2015/11/BMW-2-Series-Gran-Coupe-Rendering.jpg" width="400" id="carimage"/>
-		<hr/>
-		<h2>Exercise 4: Moving things around</h2>
-		<ul>
-		  <li>
-			<p class="surprise">You can do neat things by editing CSS-rules via  JavaScript. See the examples in lecture slides. Then try these:</p>
-			<ol>
-			  <li><button onclick="changePosition()">Move!</button>Select the div with an id &quot;carimage&quot; and move it 200px left and 500px down</li>
-			  <li><button onclick="setInterval(function(){doMove();},1000); ">Animate</button> Write a  funtion doMove() which  will move the image across the screen, or even better: back and forth on  the screen. The Interval required has already been added to the onclick -event of the list item.</li>
-			  <li><button onclick="setInterval(function(){fadeOut();},250);">Fade out!</button> Wite  a function fadeOut() which will slowly decrease the opacity of the image from 1.0 to  0 making it fade out. The Interval required has already been added to the onclick -event of the list item</li>
-			  <li><button onclick="remove()">Disappear! </button>Finally, write JavaScript which will remove the image from the page</li>
-			</ol>
-		  </li>
-		</ul>
-		<hr/>
-		<h2>Exercise 5: Tables</h2>
-		<ul>
-		  <li class="surprise">Write a JavaScript function to  add rows to a table. Rows can contain preset values.</li>
-		  <li>When your code is working, try reading the content to be added from a set of fields below the table.</li>
-		</ul>
+<HTML>
+	<style>
+	body {
+		font-family: "Trebuchet MS", Helvetica, sans-serif;
+		color: #333333;
+	}
+	
+	div {
+		width: 200px;
+		height: 100px;
+		border: 1px solid black;
+	}
+	table, tr, td{
+	  border: 1px solid gray;
+	  width: 50%;
+	}
+	img {
+		position: relative;
+		left:0px;
+	}
+	
+	</style>
+	<script>
+		function button1(){
+			var h1 = document.getElementsByTagName('h1')[0];
+			h1.innerHTML="Modified Heading"
+			}
+		function button2(){
+			var h2 = document.getElementsByTagName('h2')[1];
+			h2.style.fontSize = '30px';
+			h2.style.fontStyle= 'italic';
+			h2.style.background = 'yellow';
+			h2.style.color = 'blue';
+			
+			}
+		function button3(){
+			var p4 = document.getElementsByTagName('p')[5];
+			p4.innerHTML+="<span style='font-style:italic'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed posuere interdum sem. Quisque ligula eros ullamcorper quis, lacinia quis facilisis sed sapien. Mauris varius diam vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget velit.</span>"
+			var body =document.getElementsByTagName('body')[0];
+			body.style="background: lightgrey";
+			
+			 var x = document.createElement("IMG");
+				x.setAttribute("src", "https://loremipsum.io/assets/images/lorem-ipsum-generator-custom-placeholder-text.jpg");
+				x.setAttribute("width", "300");
+				var newPlace = document.getElementsByTagName('p');
+				newPlace[5].appendChild(x);
+			}
+			
+			function hide(){
+				var data = document.getElementById('data');
+				data.style.display = 'none';
+			}
+			
+			function show(){
+				var data = document.getElementById('data');
+				data.style.display = 'block';		
+			}
+			
+			function surprise(){
+				var sur = document.getElementsByClassName('surprise');
+				for (var i=0; i< sur.length; i++) {
+				sur[i].style.color = 'red';
+				}
+				}
+			function change(){
+				var chng = document.getElementById("mySelect").value;
+				alert("You selected: " + chng);
+				if (chng = "Mercedes"){
+					document.getElementById('carimage').src='https://www.mercedes-benz.fi/passengercars/_jcr_content/image.MQ6.2.2x.20190401083207.png';
+					}
+				if (chng = "Audi"){
+					document.getElementById('carimage').src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRcdjh6OIgGlbPvmmM7v4QP9Cq8Tv23-htduA&usqp=CAU';
+					}
+				if (chng = "Volvo") {
+					document.getElementById('carimage').src='data:image/jpeg;base64,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';
+						}
+			}
+				
+			function onmouse(){
+				var car = document.getElementById('carimage');
+				car.style.border= "thick solid blue";
+				}
+			function offmouse(){
+				var car = document.getElementById('carimage');
+				car.style.border= "none";
+				}	
+				
+			function changePosition(){
+				var x = document.getElementById('carimage');
+					x.style.position = 'relative';
+					x.style.left = -200+'px'; 
+					x.style.down = 500+'px';
+					
+				}
+			
+			function doMove(){
+					var y = document.getElementById('carimage');
+					var topVal = parseInt(y.style.left);
+					y.style.left = (topVal+10)+'px'; 
+				}
+			
+			function fadeOut(){
+					var y = document.getElementById('carimage');
+						 y.style.opacity -= 0.1;
+				if(y.style.opacity < 0.0) {
+					y.style.opacity = 0.0;
+				} else {
+					setTimeout("fadeOut(\"" + y + "\")", 100);
+				}
+			}
+			
+			function hide(){
+			document.getElementById('carimage').remove();
+				}
+			function insertRows() {
+				var table = document.getElementById("data");
+				var row = table.insertRow(1);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				var cell3 = row.insertCell(2)
+				cell1.innerHTML = document.getElementById("textfield").value;
+				cell2.innerHTML = document.getElementById("textfield2").value;
+				cell3.innerHTML = document.getElementById("textfield3").value;
+			}	
+			
+			
+	</script>
+	
+	<h1>Workshop 4: DOM Scripting</h1>
+	<hr />
+	<p>In this exercise we will practice the art of DOM Scripting with JavaScript. Use the lecture-material as a reference guide side by side these exercises. It might also be a good idea to save the lines of code you write during the exercises for later use. </p>
+	
+	
+	<h2>Exercise 1: Basic  DOM Manipulation</h2>
+	<p>&nbsp;Below you will see three buttons. Edit the source code and add an onClick-events to these buttons. Use Developer Console to find the </p>
+	<p>
+	  <button onclick="button1()">Button 1</button>
+	  <button onclick="button2()">Button 2</button>
+	  <button onclick="button3()">Button 3</button>
+	</p>
+	
+	<ul>
+	  <li>The first button should run a JavaScript-function, which will find the reference to &quot;Workshop 4&quot; heading on this page and change the contents of it to &quot;Modified Heading!&quot;. </li>
+	  <li> The second button should run a function, which </li>
+	  will modify the style of the &quot;Exercise 2&quot; heading on this page. JavaScript should change at least the font size, style and color and the background color
+	  <li>The third button should append the following text paragraph after the <strong>4th paragraph tag &lt;p&gt;</strong> on the page (without overwriting the current content). Change the background of the entire page as well. Note: The Lorem ipsum text should be in italics. It should also add a logo image of some sort after the text.<br>
 		<br>
-		<table id="data" class="display">
-			<thead>
-			  <tr>
-				<th>Name</th>
-				<th>Position</th>
-				<th>Salary</th>
-			  </tr>
-			</thead>
-			<tbody>
-			  <tr>
-				<td>Tiger Nixon</td>
-				<td>System Architect</td>
-				<td>$320,800</td>
-			  </tr>
-			  <tr>
-				<td>Garrett Winters</td>
-				<td>Accountant</td>
-				<td>$170,750</td>
-			  </tr>
-			  <tr>
-				<td>Ashton Cox</td>
-				<td>Junior Technical Author</td>
-				<td>$86,000</td>
-			  </tr>
-			  <tr>
-				<td>Cedric Kelly</td>
-				<td>Senior Javascript Developer</td>
-				<td>$433,060</td>
-			  </tr>
-			  <tr>
-				<td>Airi Satou</td>
-				<td>Accountant</td>
-				<td>$162,700</td>
-			  </tr>
-			</tbody>
-			<tfoot>
-			</tfoot>
-		</table>
-		<p>
-			Name
-			<label for="textfield">:</label>
-			<input type="text" name="textfield" id="textfield">
-			<br>
-			Position:
-			<input type="text" name="textfield2" id="textfield2">
-			<br>
-			Salary: 
-			<input type="text" name="textfield3" id="textfield3">
-			<br>
-			<input type="button" onclick="insertRows()" name="Insert" id="Insert" value="Insert">
-		</p>
-		<hr/>
-		<h2>Bonus exercises for the enthusiastics</h2>
-		<ul>
-			<li dir="ltr">
-				<p dir="ltr">Write a loop, which goes through all the LI tags in the page and replaces them with a &lt;strong&gt; tagged, red text saying &quot;Replaced&quot;.</p>
-			</li>
-			<li dir="ltr">How would you replace the contents only on the ones with the word &lsquo;Select&rsquo; in them?</li>
-		</ul>
-	</body>
-</html>
+	  <strong id="lorem"><em>&quot;Lorem ipsum</em></strong><em> dolor sit amet, consectetuer   adipiscing elit. Sed posuere interdum sem. Quisque ligula eros   ullamcorper quis, lacinia quis facilisis sed sapien. Mauris varius diam   vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget   velit. &quot;</em></li>
+	</ul>
+	
+	<h2>Exercise 2: DOM Traversing using ID's and classes</h2>
+	<p class="surprise">Add onchange -events to following checkboxes.</p>
+	<p>
+	  <label>
+		<input onchange="hide()" name="CheckboxGroup1" type="checkbox" id="CheckboxGroup1_0" title="Actions" value="1">
+	   Hide me </label>
+	  <br>
+	  <label>
+		<input onchange="show()" type="checkbox" name="CheckboxGroup1" value="2" id="CheckboxGroup1_1">
+		Show me</label>
+	  <br>
+	  <label>
+		<input onchange="surprise()" type="checkbox" name="CheckboxGroup1" value="3" id="CheckboxGroup1_2"> 
+		<span id="surpise">Surprise</span>
+	  </label>
+	</p>
+	<ul>
+	  <li>First checkbox: Find out which element has been described with the id &quot;data&quot;. Change the visibility (display value) of the element to none. What happens?</li>
+	  <li>Second checkbox should return the visibility of the element to a normal state (block).</li>
+	  <li>Third checkbox should find the elements with class &quot;surprise&quot; and change the font size to 20.</li>
+	</ul>
+	<p>&nbsp;</p>
+	  <h2>Exercise 3: Images and pulldowns</h2>
+	<li>Write a JavaScript function, which will fire when the pulldown menu item is changed. Show the users choice using alert -box.</li>
+	<li>When the mouse is moved on top of the image, a colored border should appear surrounding it. On mouse out, border should disappear</li>
+	<li>When you have accomplished the above, change the image (id=&quot;carimage&quot;) below based on the users choice on the pulldown menu below. Find appropriate images from the web.
+	  <p>Select a new car from the list.</p>
+	  <select name="mySelect" id="mySelect" onchange="change()">
+		<option value="BMW">BMW         
+		<option value="Audi">Audi
+		<option value="Mercedes">Mercedes
+		<option value="Volvo">Volvo
+	  </select>
+	  <br>
+	  <br>
+	<img onmouseover="onmouse()" onmouseout="offmouse()" style="left: 0px; opacity: 1;" src="data:image/jpeg;base64,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" width="400" id="carimage"/></li>
+	<h2>Exercise 4: Moving things around</h2>
+	<ul>
+	  <li>
+		<p class="surprise">You can do neat things by editing CSS-rules via  JavaScript. See the examples in lecture slides. Then try these:</p>
+		<ol>
+		  <li><button onclick="changePosition()">Move!</button>Select the div with an id &quot;carimage&quot; and move it 200px left and 500px down</li>
+		  <li><button onclick="setInterval(function(){doMove();},1000); "/>Animate</button> Write a  funtion doMove() which  will move the image across the screen, or even better: back and forth on  the screen. The Interval required has already been added to the onclick -event of the list item.</li>
+		  <li><button onclick="setInterval(function(){fadeOut();},250);"/>Fade out!</button> Wite  a function fadeOut() which will slowly decrease the opacity of the image from 1.0 to  0 making it fade out. The Interval required has already been added to the onclick -event of the list item</li>
+		  <li><button onclick="hide()"/>Disappear! </button>Finally, write JavaScript which will remove the image from the page</li>
+		</ol>
+	  </li>
+	</ul>
+	
+	<h2>Exercise 5: Tables</h2>
+	<ul>
+	  <li class="surprise">Write a JavaScript function to  add rows to a table</li>
+	  . Rows can contain preset values.
+	  <li>When your code is working, try reading the content to be added from a set of fields below the table.</li>
+	  <br>
+	  <table id="data" class="display" cellspacing="0" width="100%">
+		<thead>
+		  <tr>
+			<th>Name</th>
+			<th>Position</th>
+			<th>Salary</th>
+		  </tr>
+		</thead>
+		<tfoot>
+		</tfoot>
+		<tbody>
+		  <tr>
+			<td>Tiger Nixon</td>
+			<td>System Architect</td>
+			<td>$320,800</td>
+		  </tr>
+		  <tr>
+			<td>Garrett Winters</td>
+			<td>Accountant</td>
+			<td>$170,750</td>
+		  </tr>
+		  <tr>
+			<td>Ashton Cox</td>
+			<td>Junior Technical Author</td>
+			<td>$86,000</td>
+		  </tr>
+		  <tr>
+			<td>Cedric Kelly</td>
+			<td>Senior Javascript Developer</td>
+			<td>$433,060</td>
+		  </tr>
+		  <tr>
+			<td>Airi Satou</td>
+			<td>Accountant</td>
+			<td>$162,700</td>
+		  </tr>
+		</tbody>
+	  </table>
+	</ul>
+	<p>
+	  Name
+		<label for="textfield">:</label>
+	  <input type="text" name="textfield" id="textfield">
+	  <br>
+	  Position:
+	  <input type="text" name="textfield2" id="textfield2">
+	<br>
+	Salary: 
+	<input type="text" name="textfield3" id="textfield3">
+	<br>
+	<input type="button" onclick="insertRows()" name="Insert" id="Insert" value="Insert">
+	</p>
+	<h2>Bonus exercises for the enthusiastics</h2>
+	<ul>
+	  <li dir="ltr">
+		<p dir="ltr">Write a loop, which goes through all the LI tags in the page and replaces them with a &lt;strong&gt; tagged, red text saying &quot;Replaced&quot;.</p>
+	  </li>
+	  <li dir="ltr">How would you replace the contents only on the ones with the word &lsquo;Select&rsquo; in them?</li></ul>
+	</html>
 
 
