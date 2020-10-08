@@ -4,6 +4,63 @@
     <meta charset="UTF-8" />
     <title>Workshop 5</title>
     <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    function validateForm(){
+      var u = document.getElementsByName("comment")[0].value;
+      document.getElementsByName("comment")[0].value = u.substring(0, 50);
+      var x = document.forms["myForm"]["email"].value;
+      var y = document.forms["myForm"]["comment"].value;
+     if (x.indexOf("@")<1 || x.length <6 || x.length > 15) {
+        var e = document.forms.myForm.email;
+        e.style.borderColor = "red";
+        document.getElementById('feedback').innerHTML="<b>*Give a propper email</b>";
+        return false;
+      }
+        else if (y.length==0){
+        var b = document.forms.myForm.comment;
+        b.style.borderColor = "red";
+        document.getElementById('feedback1').innerHTML="<b>*Please add a comment</b>";
+        return false;
+      }
+        else{
+          alert(x + " Thank you for your comment");
+        return false;
+        }
+      
+    }
+
+    function calcMembership(){
+     var select = document.getElementById("type").selectedIndex;
+     var price;
+     var sum;
+     switch (select) {
+      case 0:
+        price = 10;
+        break;
+      case 1:
+        price = 15 ;
+        break;
+      case 2:
+        price = 20;
+        break;
+      case 3:
+        price = 25;
+      }
+      if (document.forms.secondForm.years.value>=5) {
+          sum = (price * document.getElementById("years").value/100*80)-5;
+          document.getElementById('discount1').innerHTML="<b>Congratulations! you'll get extra 5 eur discount!</b>";
+      }
+        else if (document.forms.secondForm.years.value>1){
+        sum = price * document.getElementById("years").value/100*80;
+        }
+        
+        else sum = (price * document.getElementById("years").value);
+
+      document.getElementById("cost").value = sum;  
+      return false;
+    }
+
+  </script>
   </head>
   <body>
     <h1>Workshop 5: Smart Forms -- demo</h1>
@@ -44,16 +101,18 @@
       feedback to the user. Preferably by displaying some text message on the
       page, next to the input field. See the lecture slides for demo.
     </p>
-    <form onsubmit="">
+    <form name = "myForm" onsubmit="return validateForm()">
       <div class="no-border">
         <label
           >Email address:<br />
           <input type="text" name="email" />
+          <span id= "feedback"></span> <br/>
         </label>
       </div>
       <div class="no-border">
         <label> Comment:<br /> </label>
         <textarea name="comment"></textarea>
+        <span id= "feedback1"></span> <br/>
       </div>
       <br />
       <input type="submit" value="Send" />
@@ -82,7 +141,7 @@
       but will also be given an extra 5€ discount with a special greetings text
       on screen.
     </p>
-    <form action="#" method="post" id="theForm">
+    <form action="#" method="post" id="secondForm" onsubmit="return calcMembership()">
       <fieldset>
         <legend>Create Your Membership</legend>
         <p>
@@ -101,6 +160,7 @@
         <div>
           <label for="years">Years</label>
           <input type="number" name="years" id="years" min="1" required />
+          <span id= "discount1"></span> <br/>
         </div>
         <div>
           <label for="cost">Cost</label>
@@ -133,6 +193,7 @@
       value in the total calculation in shopping.js.
     </p>
     <p>&nbsp;</p>
+    <form action="#" method="post" id="theForm" onsubmit="return calculate()">
     <fieldset>
       <p>Calculate a bulk book order.</p>
       <div>
@@ -148,16 +209,21 @@
       </div>
       <div>
         <label for="price">Price Per Unit</label>
-        <input type="text" name="price" id="price" value="1.00" required />
+        <input type="number" step="0.01"  name="price" id="price" value="1.00" required />
       </div>
       <div>
         <label for="tax">VAT (%)</label>
-        <input type="text" name="tax" id="tax" value="0.0" required />
+        <input type="number" step="0.01"  name="tax" id="tax" value="0.0" required />
+      </div>
+      <div>
+        <label for="shipping">Shipping</label>
+        <input type="number" step="0.01"  name="shipping" id="shipping" value="0.00" required />
       </div>
       <div>
         <label for="discount">Discount</label>
         <input
-          type="text"
+          type="number" 
+          step="0.01"
           name="discount"
           id="discount"
           value="0.00"
@@ -166,7 +232,7 @@
       </div>
       <div>
         <label for="total">Total</label>
-        <input type="text" name="total" id="total" value="0.00" />
+        <input type="number" step="0.01" name="total" id="total" value="0.00" />
       </div>
       <div>
         <input
@@ -177,6 +243,7 @@
         />
       </div>
     </fieldset>
+  </form>
 
     <hr />
     <h2>Exercise 4: Hidden Extra fields</h2>
@@ -195,7 +262,32 @@
           detailed information regarding on the selected contact method.
         </p>
       </li>
+      <form name = "myForm" onsubmit="return validateForm()">
+        <div class="no-border">
+          <label
+            >Email address:<br />
+            <input type="text" name="email" />
+            <span id= "feedback"></span> <br/>
+          </label>
+        </div>
+        <div class="no-border">
+          <label> Comment:<br /> </label>
+          <textarea name="comment"></textarea>
+          <span id= "feedback1"></span> <br/>
+        </div>
+        <div>
+          <label for="contact">Select the preferable way to contact</label>
+          <select name="type" id="type" size="4" required>
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
+            <option value="text">Text message</option>
+            <br/>
+       </div>
+        <br/>
+        <br/>
+        <input type="submit" value="Send" />
+      </form>
     </ul>
-    <script src="js/shopping.js"></script>
+    <script src="shopping.js"></script>
   </body>
 </html>
