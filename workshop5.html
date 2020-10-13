@@ -5,7 +5,7 @@
     <title>Workshop 5</title>
     <link rel="stylesheet" href="css/styles.css" />
   <script>
-    function validateForm(){
+       function validateForm(){
       var u = document.getElementsByName("comment")[0].value;
       document.getElementsByName("comment")[0].value = u.substring(0, 50);
       var x = document.forms["myForm"]["email"].value;
@@ -27,6 +27,21 @@
         return false;
         }
       
+    }
+    function validateForm2(){
+      var select = document.getElementById("way").selectedIndex;
+      switch(select) {
+        case 0:
+          document.getElementById('contactEmail').style.display= "block";
+          break;
+        case 1:
+        document.getElementById('contactPhone').style.display= "block";
+          break;
+        case 2:
+        document.getElementById('contactMessage').style.display= "block";
+          break;
+      }
+      return false;
     }
 
     function calcMembership(){
@@ -59,6 +74,8 @@
       document.getElementById("cost").value = sum;  
       return false;
     }
+
+   
 
   </script>
   </head>
@@ -262,7 +279,7 @@
           detailed information regarding on the selected contact method.
         </p>
       </li>
-      <form name = "myForm" onsubmit="return validateForm()">
+      <form name = "myForm" onsubmit="return validateForm2()">
         <div class="no-border">
           <label
             >Email address:<br />
@@ -273,21 +290,45 @@
         <div class="no-border">
           <label> Comment:<br /> </label>
           <textarea name="comment"></textarea>
-          <span id= "feedback1"></span> <br/>
         </div>
         <div>
           <label for="contact">Select the preferable way to contact</label>
-          <select name="type" id="type" size="4" required>
+		    <br/>
+          <select name="way" id="way" size="3" required>
             <option value="email">Email</option>
             <option value="phone">Phone</option>
             <option value="text">Text message</option>
             <br/>
-       </div>
-        <br/>
-        <br/>
-        <input type="submit" value="Send" />
+        
+          <div>
+      
+         <input type="submit" value="Send" />
+         <br />
+         <br />
+         <span id = "contactEmail"> 
+          <label> Email for contact<br /> </label>
+          <textarea name="contactEmail"></textarea>
+        </span>
+        <span id = "contactPhone"> 
+          <label> Phone number to call<br /> </label>
+          <textarea name="contactPhone"></textarea>
+        </span>
+      </br>
+        <span id = "contactMessage"> 
+          <label> Phone number to send messages<br /> </label>
+          <textarea name="contactMessage"></textarea>
+        </span>
       </form>
+     
     </ul>
-    <script src="shopping.js"></script>
+    <script src="shopping.js">
+    </script>
+    <script> var extra = document.getElementById('contactEmail');
+    extra.style.display = 'none';
+    var phone = document.getElementById('contactPhone');
+    phone.style.display = 'none';
+    var message = document.getElementById('contactMessage');
+    message.style.display = 'none';
+    </script>
   </body>
 </html>
