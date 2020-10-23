@@ -1,0 +1,57 @@
+body {
+    background-color: rgb(194, 214, 214);
+    font-family: "Lucida Console";
+	font-weight: bold;
+}
+.frame {
+    position: relative;
+    top: 20%;
+    left: 30%;
+    width: 450px;
+    border-radius: 2px;
+    color: #497081;
+    background: white;
+    padding: 15px;
+}
+h1 {
+	text-align: center;
+} 
+h4 {
+	text-align: center;
+}
+input {
+    margin: 15px;
+    padding-left: 10px;
+    border: 2px solid #497081;
+    background-color:  rgb(194, 214, 214);
+    border-radius: 4px;
+}
+ul {
+    text-align: center;
+    list-style-type: square;
+  }
+  
+ button {
+    margin: 15px;
+    border: 2px solid #497081;
+    background-color:  rgb(194, 214, 214);
+    border-radius: 4px;
+ } 
+ .comment {
+     font-size: 10px;
+
+ }
+ #myProgress {
+    width: 100%;
+    background-color: #ddd;
+  }
+  
+  #myBar {
+    width: 0%;
+    height: 30px;
+    background-color: #4CAF50;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }
+
