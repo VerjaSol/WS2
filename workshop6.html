@@ -4,8 +4,48 @@
 		<title>Workshop 6</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/styles.css">
+		<script>
+			function getData(){
+				var dest = document.getElementById("destination").value;
+				var arr = document.getElementById("arrival").value;
+				localStorage.setItem("destination", dest);
+				localStorage.setItem("arrival", arr);
+
+				if(document.getElementById('CheckboxGroup1_0').checked) {
+        			localStorage.setItem('CheckboxGroup1_0', true);}
+					if(document.getElementById('CheckboxGroup1_1').checked) {
+        			localStorage.setItem('CheckboxGroup1_1', true);}
+					if(document.getElementById('CheckboxGroup1_2').checked) {
+        			localStorage.setItem('CheckboxGroup1_2', true);}
+					if(document.getElementById('CheckboxGroup1_3').checked) {
+        			localStorage.setItem('CheckboxGroup1_3', true);}
+					if(document.getElementById('CheckboxGroup1_4').checked) {
+        			localStorage.setItem('CheckboxGroup1_4', true);}
+			}
+
+			function load(){
+				if(localStorage.destination){
+					var dest = localStorage.getItem("destination");
+
+					var data = document.getElementById("sessiondata");
+					data.innerHTML= dest;
+				}
+				if(localStorage.arrival){
+					var dest = localStorage.getItem("arrival");
+
+					var data = document.getElementById("sessiondata");
+					data.innerHTML+= " "+ dest;
+				}
+			}
+			function getData1(){
+				var dest = document.getElementById("destination1").value;
+				var arr = document.getElementById("arrival1").value;
+				sessionStorage.setItem("destination1", dest);
+				sessionStorage.setItem("arrival1", arr);
+			}
+		</script>
 	</head>
-	<body class="ws6" onload="">
+	<body class="ws6" onload="load()">
 		<h1>Workshop 6: Using Localstorage</h1>
 		<hr />
 		<h2>Exercise 1: Saving the entered data</h2>
@@ -52,6 +92,27 @@
 			should be used. Copy the form above here and implement sessionstorage for it. See what 
 			happens, when you close the browser. You can utilize developer tools to study the data (F12, 
 			select Application tab, then LocalStorage on the left).</p>
+		</div>
+		<div>
+			<label for="destination">Destination:</label>
+			<input type="text" name="textfield" id="destination1">
+		</div>
+		<div>
+			<label for="arrival">Arrival Date:</label>
+			<input type="text" name="textfield" id="arrival1">
+		</div>
+		<div id="services" class="border">
+			<p>Services:</p>
+			<div><label><input type="checkbox" name="CheckboxGroup1" value="Internet" id="1CheckboxGroup1_0">Internet</label></div>
+			<div><label><input type="checkbox" name="CheckboxGroup1" value="AC" id="1CheckboxGroup1_1">Air Conditioning</label></div>
+			<div><label><input type="checkbox" name="CheckboxGroup1" value="minibar" id="1CheckboxGroup1_2">Minibar</label></div>
+			<div><label><input type="checkbox" name="CheckboxGroup1" value="car" id="1CheckboxGroup1_3">Car rent</label></div>
+			<div><label><input type="checkbox" name="CheckboxGroup1" value="sauna" id="1CheckboxGroup1_4">Sauna</label></div>
+		</div>	
+		<div class="clear">
+			<p>
+			  <input type="button" name="button" id="button1" value="Reserve" onclick="getData1()">
+			</p>
 		</div>
 		<hr/>
 		<div>
