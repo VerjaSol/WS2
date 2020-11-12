@@ -1,5 +1,74 @@
 <!DOCTYPE html>
 <html><head><link href="/learning/styles/default.css" rel="stylesheet" type="text/css" /></head>
+<script>
+	function parseData(){
+		var allquotes =  document.getElementsByTagName("quotes");  
+
+		// Use for-loops to iterate the array of quotes
+		for (i = 0; i< allquotes.length; i++) {
+    		quote = allquotes[i].innerHTML + "<br>";
+    		document.getElementById("myDiv").innerHTML += quote;
+	}
+	}
+
+	function loadXMLDoc() {
+            // Create AJAX object
+            var xmlhttp = new XMLHttpRequest();
+            // Specify the data / url to be fetched
+            xmlhttp.open("GET", "http://quotes.rest/qod.xml", true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function() {
+                if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					  
+                    document.getElementById("quotes").innerHTML =xmlhttp.responseText;;
+                }
+            }
+        }
+
+		function parseXMLDoc() {
+            // Create AJAX object
+            var xmlhttp = new XMLHttpRequest();
+            // Specify the data / url to be fetched
+            xmlhttp.open("GET", "http://quotes.rest/qod.xml", true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function() {
+                if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					 var xmlDoc = xmlhttp.responseXML;
+					 var quotes =  xmlDoc.getElementsByTagName("quote");
+					var firstQuote = quotes[0];
+					var quoteText = firstQuote.innerHTML; 
+
+                    document.getElementById("quote1").innerHTML = quoteText;
+					var author =  xmlDoc.getElementsByTagName("author");
+					var author1 = author[0];
+					var authorText = author1.innerHTML;
+					document.getElementById("author").innerHTML = authorText;
+					document.getElementById("author").style.fontStyle= "italic";
+					document.getElementById("quote1").style.fontStyle= "italic";
+                }
+            }
+        }
+
+		function parseIltalehti(){
+			var xmlhttp = new XMLHttpRequest();
+            // Specify the data / url to be fetched
+            xmlhttp.open("GET", "http://www.iltalehti.fi/rss/uutiset.xml", true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function() {
+                if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					 var xmlDoc = xmlhttp.responseXML;
+					 var titles =  xmlDoc.getElementsByTagName("title");  
+						for (i = 0; i< titles.length; i++) {
+    					title = titles[i].innerHTML + "<br>";
+    					
+					 document.getElementById("newsfeed").innerHTML+=title;
+						}
+				}
+
+			}
+
+		}
+</script>
 <body><div>
 <h1>Workshop 7: Using AJAX and parsing XML</h1>
 </div>
@@ -20,8 +89,8 @@ and start doing the exercises.</p>
 </div>
 <p>This page has XML data embedded into it. See page source, line 78. The browser cannot display it properly, but its there. Below you can also see the structure data. Write a function called parseData(), which 
 will output the quote and author tags from XML when button is clicked. Hint: Use document.getElementsByTagName() function. See PowerPoint for reference.</p>
-<div><input id="Fetch" name="Fetch" type="button" value="Button" /></div>
-<div>
+<div><input id="Fetch" name="Fetch" type="button" value="Button" onClick="parseData()" /></div>
+<div id="myDiv">
 <pre>
 <!-- THIS IS HERE ONLY FOR DISPLAYing THE STRUCTURE OF THE XML DATA IN THE BROWSER -->
   I'm not concerned about all hell breaking loose, but that a PART of hell will break loose... it'll be much harder to detect.
@@ -97,7 +166,7 @@ file to a div below (id=�quotes�). Here's another alternative: http://quotes
 </div>
 <div>&nbsp;</div>
 <div>
-<p><input id="Fetch2" name="Fetch2" type="button" value="Button" /></p>
+<p><input id="Fetch2" name="Fetch2" type="button" value="Button" onclick="loadXMLDoc()" /></p>
 </div>
 <div>
 <div id="quotes">&nbsp;</div>
@@ -111,7 +180,7 @@ file to a div below (id=�quotes�). Here's another alternative: http://quotes
 <p>Continue working from exercise 2. Once you have injected the results, JavaScript to parse the XML/JSON-file and output the file contents in a nice HTML-table below. Add some styles to the table.</p>
 </div>
 <div>
-<p><input id="Fetch3" name="Fetch3" type="button" value="Button" /></p>
+<p><input id="Fetch3" name="Fetch3" type="button" value="Button" onclick="parseXMLDoc()"/></p>
 </div>
 <div>
 <div id="tabledata">
@@ -122,8 +191,8 @@ file to a div below (id=�quotes�). Here's another alternative: http://quotes
 <td><strong>Author</strong></td>
 </tr>
 <tr>
-<td>Here goes the quote data</td>
-<td>Here goes the author data</td>
+<td id="quote1">Here goes the quote data</td>
+<td id="author">Here goes the author data</td>
 </tr>
 <tr>
 <td>&nbsp;</td>
@@ -151,7 +220,7 @@ apps/tree/5%3A%20Asynchronous%20JavaScript%20(AJAX)%2Filtalehti.xml). Parse the 
 </ul>
 </div>
 <div><input id="Fetch3" name="Fetch3" type="button" value="Load YAHOO newsfeed" /></div>
-<div><input id="Fetch3" name="Fetch3" type="button" value="Load Iltalehti Newsfeed" /></div>
+<div><input id="Fetch3" name="Fetch3" type="button" value="Load Iltalehti Newsfeed" onclick="parseIltalehti()"/></div>
 <div>
 <div id="newsfeed">&nbsp;</div>
 </div></body>
