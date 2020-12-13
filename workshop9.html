@@ -19,9 +19,10 @@
                 left:0px;
             }
         </style>
-        <script>
-            <!-- JavaScript goes here -->
-        </script>
+        <script  src="http://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous">
+                    </script>
     </head>
     <body>
         <h1>Workshop 9: Using jQuery</h1><hr />
@@ -85,4 +86,35 @@
         <div id="ajax" style="border: 1px solid black; width: 400px;">
         </div>
     </body>
+    <script>
+        $("#button2").click(function(){
+        $("h1").fadeOut();
+        })
+
+        $("#button").click(function(){
+        $("h1").fadeIn();
+        })
+
+        $("#button3").click(function(){
+        $("h2").slideUp();
+        })
+        $("#button4").click(function(){
+        $("h2").slideDown();
+        })
+        
+        $("#button5").click(function(){
+        $("h2").eq(2).animate({
+            fontSize: "64px",
+        }, 3000);
+        $("#button5").animate({
+            left: "+=150px"
+        }, 2000);
+        })
+
+        function getData(data){
+           alert(data);
+
+        }
+        $.get("https://api.ratesapi.io/api/latest", getData);
+    </script>
 </html>
